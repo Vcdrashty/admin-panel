@@ -36,8 +36,14 @@ import EqualizerIcon from "@material-ui/icons/Equalizer";
 import MapIcon from "@material-ui/icons/Map";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import FolderOpenIcon from "@material-ui/icons/FolderOpen";
+import { ListItemText, ListItem } from "@material-ui/core";
+import { Router, Link, Route } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import ProductGrid from "../e-commerce.js/product-grid";
+import ProductManage from "../e-commerce.js/product-manage";
 
 const drawerWidth = 270;
+const history = createBrowserHistory();
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,9 +106,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
     marginLeft: 720,
   },
+  content:{
+    // maxWidth: '100%',
+  },
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer(onItemClick) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -164,195 +173,216 @@ export default function MiniDrawer() {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
+      <Router history={history}>
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </div>
-        <Divider />
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            }),
+          }}
+        >
+          <div className={classes.toolbar}>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </div>
+          <Divider />
 
-        <MenuList>
-          <MenuItem>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Dashboard</Typography>
-          </MenuItem>
+          <MenuList>
+            <MenuItem>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText>Dashboard</ListItemText>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <ShoppingCartIcon />
-            </ListItemIcon>
-            <Badge badgeContent={"NodeJS"} color="primary">
-              <Typography variant="inherit">E-commerce</Typography>
-            </Badge>
-          </MenuItem>
+            <ListItem>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <Badge badgeContent={"NodeJS"} color="primary">
+                <ListItemText>E-commerce</ListItemText>
+              </Badge>
+            </ListItem>
+            <ListItem
+              button={true}
+              component={Link}
+              to="/product-manage"
+              onClick={"ProductManage"}
+            >
+              <ListItemText>Product Manage</ListItemText>
+            </ListItem>
+            <ListItem
+              button={true}
+              component={Link}
+              to="/product-grid"
+              onClick={"ProductGrid"}
+            >
+              <ListItemText>Product Grid</ListItemText>
+            </ListItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <PermIdentityIcon />
-            </ListItemIcon>
-            <Badge badgeContent={"New"} color="secondary">
-              <Typography variant="inherit">User</Typography>
-            </Badge>
-          </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <PermIdentityIcon />
+              </ListItemIcon>
+              <Badge badgeContent={"New"} color="secondary">
+                <Typography variant="inherit">User</Typography>
+              </Badge>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <DescriptionIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Documentation</Typography>
-          </MenuItem>
-        </MenuList>
-        <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <DescriptionIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Documentation</Typography>
+            </MenuItem>
+          </MenuList>
+          <Divider />
 
-        <MenuList>
-          <Typography>TEMPLATE</Typography>
-          <MenuItem>
-            <ListItemIcon>
-              <AppsIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Core</Typography>
-          </MenuItem>
+          <MenuList>
+            <Typography>TEMPLATE</Typography>
+            <MenuItem>
+              <ListItemIcon>
+                <AppsIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Core</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <TableChartIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Tables</Typography>
-          </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <TableChartIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Tables</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <LibraryBooksIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">UI Elements</Typography>
-          </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <LibraryBooksIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">UI Elements</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <DescriptionIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Forms</Typography>
-          </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <DescriptionIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Forms</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <EqualizerIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Charts</Typography>
-          </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <EqualizerIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Charts</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <MapIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Maps</Typography>
-          </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <MapIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Maps</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <StarBorderIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Extra</Typography>
-          </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <StarBorderIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Extra</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <FolderOpenIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Menu Levels</Typography>
-          </MenuItem>
-        </MenuList>
-        <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <FolderOpenIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Menu Levels</Typography>
+            </MenuItem>
+          </MenuList>
+          <Divider />
 
-        <MenuList>
-          <Typography>HELP</Typography>
-          <MenuItem>
-            <ListItemIcon>
-              <LibraryBooksIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Library</Typography>
-          </MenuItem>
+          <MenuList>
+            <Typography>HELP</Typography>
+            <MenuItem>
+              <ListItemIcon>
+                <LibraryBooksIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Library</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <ForumIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Support</Typography>
-          </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <ForumIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Support</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <HelpOutlineIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">FAQ</Typography>
-          </MenuItem>
-        </MenuList>
-        <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <HelpOutlineIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">FAQ</Typography>
+            </MenuItem>
+          </MenuList>
+          <Divider />
 
-        <MenuList>
-          <Typography>PROJECTS</Typography>
-          <MenuItem>
-            <ListItemIcon>
-              <FiberManualRecordIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">My Recent</Typography>
-          </MenuItem>
+          <MenuList>
+            <Typography>PROJECTS</Typography>
+            <MenuItem>
+              <ListItemIcon>
+                <FiberManualRecordIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">My Recent</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <FiberManualRecordIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Starred</Typography>
-          </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <FiberManualRecordIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Starred</Typography>
+            </MenuItem>
 
-          <MenuItem>
-            <ListItemIcon>
-              <FiberManualRecordIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Background</Typography>
-          </MenuItem>
-        </MenuList>
-        <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <FiberManualRecordIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Background</Typography>
+            </MenuItem>
+          </MenuList>
+          <Divider />
 
-        <MenuList>
-          <MenuItem>
-            <ListItemIcon>
-              <AddCircleIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Add Section</Typography>
-          </MenuItem>
+          <MenuList>
+            <MenuItem>
+              <ListItemIcon>
+                <AddCircleIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Add Section</Typography>
+            </MenuItem>
+          </MenuList>
+          <Divider />
 
-        </MenuList>
-        <Divider />
-
-        <MenuList>
-          <MenuItem>
-            <ListItemIcon>
-              <ChatIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Chat</Typography>
-          </MenuItem>
-        </MenuList>
-      </Drawer>
+          <MenuList>
+            <MenuItem>
+              <ListItemIcon>
+                <ChatIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Chat</Typography>
+            </MenuItem>
+          </MenuList>
+        </Drawer>
+        <main className={classes.content}>
+        <Route path="/product-grid" component={ProductGrid} />
+        <Route path="/product-manage" component={ProductManage} />
+      </main>
+      </Router>
     </div>
   );
 }
