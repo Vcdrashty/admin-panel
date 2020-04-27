@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: 50,
     marginRight: 35,
+    marginTop: 100,
   },
   grid: {
     flexGrow: 1,

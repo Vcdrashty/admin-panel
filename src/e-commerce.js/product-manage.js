@@ -12,16 +12,20 @@ import ManageTable from "./manage-table";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: 50,
-    marginRight: 40,
+    marginRight: 35,
+    marginTop: 100,
   },
   grid: {
     flexGrow: 1,
     textAlign: "left",
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
   },
   icons: {
     justifyContent: "space-between",
     padding: theme.spacing(2),
+  },
+  content: {
+    width: "150ch",
   },
 }));
 
@@ -58,7 +62,7 @@ export default function ProductManage() {
           </div>
         </Grid>
       </Paper>
-      <div>
+      <div className={classes.content}>
         <ManageTable />
       </div>
     </div>
