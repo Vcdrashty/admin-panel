@@ -14,8 +14,6 @@ import Orders from "./orders";
 import Footer from "./footer";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Settings from "./settings";
-import ProductGrid from "../e-commerce.js/product-grid";
-import ProductManage from "../e-commerce.js/product-manage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -120,8 +118,6 @@ export default function CenteredGrid() {
         </div>
         <Cards />
         <Orders />
-        <ProductManage />
-        <ProductGrid />
         <Footer />
       </main>
     </div>
