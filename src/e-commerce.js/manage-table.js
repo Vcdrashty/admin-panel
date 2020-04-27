@@ -163,7 +163,6 @@ EnhancedTableHead.propTypes = {
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
   },
   highlight:
     theme.palette.type === "light"
@@ -175,12 +174,9 @@ const useToolbarStyles = makeStyles((theme) => ({
           color: theme.palette.text.primary,
           backgroundColor: theme.palette.secondary.dark,
         },
-  title: {
-    display: "flex",
-  },
   table: {
     display: "flex",
-    flexDirection: "row",
+    flexGrow: 1,
     padding: theme.spacing(2),
   },
 }));
@@ -196,10 +192,12 @@ const EnhancedTableToolbar = (props) => {
       })}
     >
       <div className={classes.table}>
-        <Grid container>
-          <Grid item xs={4}>
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
             <Typography variant="h6">Products</Typography>
             <Typography variant="caption">12 total</Typography>
+          </Grid>
+          <Grid item xs={6}>
             <TextField
               variant="outlined"
               id="search-bar"
@@ -216,42 +214,41 @@ const EnhancedTableToolbar = (props) => {
             />
           </Grid>
 
-          <Grid item xs={4}>
+          <Grid item xs={12}>
             <Button variant="contained" style={{ backgroundColor: "#1de9b6" }}>
               Create Product
             </Button>
           </Grid>
 
-          <Grid item xs={4}>
-            <div className={classes.title}>
-              {numSelected > 0 ? (
-                <Typography
-                  className={classes.title}
-                  color="inherit"
-                  variant="subtitle1"
-                >
-                  {numSelected} selected
-                </Typography>
-              ) : (
-                <Typography className={classes} variant="h6" id="tableTitle">
-                  Products{" "}
-                </Typography>
-              )}
-
-              {numSelected > 0 ? (
-                <Tooltip title="Delete">
-                  <IconButton aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Filter list">
-                  <IconButton aria-label="filter list">
-                    <FilterListIcon />
-                  </IconButton>
-                </Tooltip>
-              )}
-            </div>
+          <Grid item xs={6}>
+            {numSelected > 0 ? (
+              <Typography
+                className={classes.title}
+                color="inherit"
+                variant="subtitle1"
+              >
+                {numSelected} selected
+              </Typography>
+            ) : (
+              <Typography className={classes} variant="h6" id="tableTitle">
+                Products{" "}
+              </Typography>
+            )}
+          </Grid>
+          <Grid item xs={6}>
+            {numSelected > 0 ? (
+              <Tooltip title="Delete">
+                <IconButton aria-label="delete">
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Filter list">
+                <IconButton aria-label="filter list">
+                  <FilterListIcon />
+                </IconButton>
+              </Tooltip>
+            )}
           </Grid>
         </Grid>
       </div>
